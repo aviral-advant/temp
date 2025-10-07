@@ -5,21 +5,25 @@ A Next.js application set up to test automated release scripts with GitHub integ
 ## Setup
 
 1. Install dependencies:
+
    ```bash
    npm install
    ```
 
 2. Set up environment variables:
+
    ```bash
    cp env.example .env
    ```
+
    Then edit `.env` and add your OpenAI API key.
 
 3. Install GitHub CLI (if not already installed):
+
    ```bash
    # macOS
    brew install gh
-   
+
    # Or download from: https://cli.github.com/
    ```
 
@@ -36,6 +40,7 @@ A Next.js application set up to test automated release scripts with GitHub integ
 ## Release Process
 
 The release script automatically:
+
 1. Analyzes commits since the last release
 2. Prompts for version bump type (major/minor/patch)
 3. Generates release notes using OpenAI
