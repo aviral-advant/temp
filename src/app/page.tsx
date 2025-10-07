@@ -101,6 +101,3 @@ export default function Home() {
     </div>
   );
 }
-
-// these are release test commits
-// some more commits
