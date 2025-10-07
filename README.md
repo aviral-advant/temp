@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Test Release App
 
-## Getting Started
+A Next.js application set up to test automated release scripts with GitHub integration.
 
-First, run the development server:
+## Setup
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Set up environment variables:
+   ```bash
+   cp env.example .env
+   ```
+   Then edit `.env` and add your OpenAI API key.
+
+3. Install GitHub CLI (if not already installed):
+   ```bash
+   # macOS
+   brew install gh
+   
+   # Or download from: https://cli.github.com/
+   ```
+
+4. Authenticate with GitHub:
+   ```bash
+   gh auth login
+   ```
+
+## Branches
+
+- `main`: Production branch
+- `staging`: Development branch for testing releases
+
+## Release Process
+
+The release script automatically:
+1. Analyzes commits since the last release
+2. Prompts for version bump type (major/minor/patch)
+3. Generates release notes using OpenAI
+4. Creates and pushes a git tag
+5. Creates a GitHub release with the generated notes
+
+### Usage
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Run from staging branch
+npm run release
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The script will prompt you to choose the version bump type and then handle the rest automatically.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Testing the Release Script
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Make some commits on the staging branch
+2. Run `npm run release`
+3. Choose your version bump type
+4. The script will create a tag and GitHub release
 
-## Learn More
+## Requirements
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Node.js 18+
+- Git
+- GitHub CLI (`gh`)
+- OpenAI API key
+- GitHub repository with proper permissions
